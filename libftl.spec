@@ -9,7 +9,7 @@ Source0:        %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 Patch0:         libdir-fix.patch
 Patch1:         headers-fix.patch
 
-BuildRequires:  cmake
+BuildRequires:  cmake3
 BuildRequires:  gcc
 BuildRequires:  gcc-c++
 
