@@ -1,3 +1,5 @@
+%undefine __cmake_in_source_build
+
 Name:           libftl
 Version:        0.9.14
 Release:        5%{?dist}
@@ -30,16 +32,13 @@ Development files for libftl.
 
 
 %build
-mkdir -p build
-pushd build
 %cmake3 -DDISABLE_AUTO_INGEST=TRUE \
         -DDISABLE_FTL_APP=TRUE \
-        -DFTL_INSTALL_INCLUDES=TRUE ..
-%make_build
-popd
+        -DFTL_INSTALL_INCLUDES=TRUE
+%cmake3_build
 
 %install
-%make_install -C build
+%cmake3_install
 
 %files
 %license LICENSE
