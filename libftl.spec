@@ -1,6 +1,6 @@
 Name:           libftl
 Version:        0.9.14
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        FTL audio/video streaming library
 
 License:        MIT
@@ -52,6 +52,9 @@ popd
 %{_includedir}/ftl/
 
 %changelog
+* Tue Aug 18 2020 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 0.9.14-5
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
+
 * Tue Feb 04 2020 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 0.9.14-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
 
