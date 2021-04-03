@@ -2,7 +2,7 @@
 
 Name:           libftl
 Version:        0.9.14
-Release:        6%{?dist}
+Release:        7%{?dist}
 Summary:        FTL audio/video streaming library
 
 License:        MIT
@@ -40,6 +40,19 @@ Development files for libftl.
 %install
 %cmake3_install
 
+mkdir -p %{buildroot}%{_libdir}/pkgconfig/
+cat << EOF > %{buildroot}%{_libdir}/pkgconfig/libftl.pc
+prefix=%{_prefix}
+libdir=%{_libdir}
+includedir=%{_includedir}/ftl
+
+Name: 
+Description: FTL audio/video streaming library.
+Version: %{version}
+Libs: -L\${libdir} -lftl
+Cflags: -I\${includedir}
+EOF
+
 %files
 %license LICENSE
 %doc README.md
@@ -47,10 +60,14 @@ Development files for libftl.
 
 
 %files devel
+%{_libdir}/pkgconfig/libftl.pc
 %{_libdir}/%{name}.so
 %{_includedir}/ftl/
 
 %changelog
+* Sat Apr 03 2021 Leigh Scott <leigh123linux@gmail.com> - 0.9.14-7
+- Add pkgconfig file
+
 * Wed Feb 03 2021 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 0.9.14-6
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
 
