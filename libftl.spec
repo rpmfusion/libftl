@@ -2,18 +2,22 @@
 
 Name:           libftl
 Version:        0.9.14
-Release:        7%{?dist}
+Release:        8%{?dist}
 Summary:        FTL audio/video streaming library
 
 License:        MIT
 URL:            https://github.com/mixer/ftl-sdk
 Source0:        %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
-Patch0:         libdir-fix.patch
-Patch1:         headers-fix.patch
+Patch0:         cmake-Use-external-jansson-if-possible.patch
+Patch1:         cmake-Install-into-standard-directories.patch
+Patch2:         cmake-Install-a-pkgconfig-file.patch
+Patch3:         refactor-remove-ftl_app-completely.patch
 
 BuildRequires:  cmake3
 BuildRequires:  gcc
 BuildRequires:  gcc-c++
+BuildRequires:  jansson-devel
+BuildRequires:  libcurl-devel
 
 %description
 FTL-SDK is a cross platform SDK written in C to enable sending audio/video to
@@ -40,19 +44,6 @@ Development files for libftl.
 %install
 %cmake3_install
 
-mkdir -p %{buildroot}%{_libdir}/pkgconfig/
-cat << EOF > %{buildroot}%{_libdir}/pkgconfig/libftl.pc
-prefix=%{_prefix}
-libdir=%{_libdir}
-includedir=%{_includedir}/ftl
-
-Name: 
-Description: FTL audio/video streaming library.
-Version: %{version}
-Libs: -L\${libdir} -lftl
-Cflags: -I\${includedir}
-EOF
-
 %files
 %license LICENSE
 %doc README.md
@@ -62,9 +53,12 @@ EOF
 %files devel
 %{_libdir}/pkgconfig/libftl.pc
 %{_libdir}/%{name}.so
-%{_includedir}/ftl/
+%{_includedir}/libftl/
 
 %changelog
+* Thu Apr 22 2021 Leigh Scott <leigh123linux@gmail.com> - 0.9.14-8
+- Use archlinux patches
+
 * Sat Apr 03 2021 Leigh Scott <leigh123linux@gmail.com> - 0.9.14-7
 - Add pkgconfig file
 
